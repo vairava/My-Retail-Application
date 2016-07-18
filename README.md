@@ -16,7 +16,7 @@ Setting MyRetailApplication in local:
           https://github.com/vairava/My-Retail-Application.git
       2.Use Apache Tomcat 8.0 for running the application and java-1.8(all the dependent jars are included in the workspace itself) .
       3.Set test data in mongodb(see heading "Setting MongoDB data" below)
-      4.Hit the service and validate result(see heading "Test and validate MyRetailService" below)
+      4.Hit the MyRetail service and validate results(see heading "Test and validate MyRetailService" below)
 
 Setting MONGODB data:
 ----------------------------
@@ -40,19 +40,23 @@ Test and validate MyRetailService:
 ---------------------------------
  1.Testing GET service to retrieve Product details:
  ---------------------------------------------------
+ 
     	1.Use the below url in the browser
     			http://localhost:8080/MyRetailService/rs/MyRetail/products/{productId}
     				eg if product id is 13860428 then service url will be like below
     				http://localhost:8080/MyRetailService/rs/MyRetail/products/13860428
     				
     	2.The output will be a json with id,name and current_price
+    	3.If Target url for getting data needs to be changed then edit the url's first part and second part in ApplicationConstants.java under com.work.myretail.util package.
 	
  2.Testing PUT service for updating pricing data:
  -----------------------------------------------
+ 
         1.Use the same url we used for GET service above
       	http://localhost:8080/MyRetailService/rs/MyRetail/products/{productId}
       				eg if product id is 13860428 then service url will be like below
       				http://localhost:8080/MyRetailService/rs/MyRetail/products/13860428
+      				
         2.Use Poster or Postman chrome plugin and set the Request Type as "PUT" and 
         				Header name="Content-type" and Value = "application/json"
         3.Use the below json to update the pricing data with appropriate currency_code and value for the product Id mentioned in the URL
