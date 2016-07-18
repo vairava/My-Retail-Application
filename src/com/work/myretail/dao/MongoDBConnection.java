@@ -69,7 +69,7 @@ public class MongoDBConnection {
 		
 		while(cursor.hasNext()){
 			BasicDBObject readTO=(BasicDBObject)cursor.next();
-			LOGGER.debug(readTO);
+			System.out.println(readTO);
 		}
 		
 		

@@ -54,7 +54,7 @@ public class MyRetailProcess {
 	public MyRetailOutputTO manuplateResults( MyRetailOutputTO finalTo,BasicDBObject result){
 		LOGGER.debug("entering manuplateResults()-->>");
 		String currencyValue=result.getString(ApplicationConstants.CURRENCY_CODE);
-		int value=result.getInt(ApplicationConstants.VALUE);
+		double value=result.getDouble(ApplicationConstants.VALUE);
 		PricingDataTO pricingTo=new PricingDataTO();
 		pricingTo.setCurrency_code(currencyValue);
 		pricingTo.setValue(value);

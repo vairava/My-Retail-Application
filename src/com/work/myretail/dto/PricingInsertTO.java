@@ -4,7 +4,7 @@ public class PricingInsertTO {
 int id=0;
 String productName="";
 String currency_code="";
-double value=0;
+double value=0.00d;
 public int getId() {
 	return id;
 }
