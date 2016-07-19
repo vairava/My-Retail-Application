@@ -47,42 +47,5 @@ public class HTTPClientHelper {
 		return result.toString();
 	}
 
-	// HTTP POST request
-	public String sendPost() throws Exception {
-
-		String url = "http://IBDFQAB3.SYSPLEX.HOMEDEPOT.COM:20545/CICS/po00/popd10i";
-		HttpClient client = new DefaultHttpClient();
-		HttpPost post = new HttpPost(url);
-
-		post.setHeader("User-Agent", USER_AGENT);
-
-		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-		/*
-		 * urlParameters.add(new BasicNameValuePair("sn", "C02G8416DRJM"));
-		 * urlParameters.add(new BasicNameValuePair("cn", ""));
-		 * urlParameters.add(new BasicNameValuePair("locale", ""));
-		 * urlParameters.add(new BasicNameValuePair("caller", ""));
-		 * urlParameters.add(new BasicNameValuePair("num", "12345"));
-		 */
-		post.setEntity(new UrlEncodedFormEntity(urlParameters));
-
-		HttpResponse response = client.execute(post);
-		logger.debug("\nSending 'POST' request to URL : " + url);
-		logger.debug("Post parameters : " + post.getEntity());
-		logger.debug("Response Code : "
-				+ response.getStatusLine().getStatusCode());
-
-		BufferedReader rd = new BufferedReader(new InputStreamReader(response
-				.getEntity().getContent()));
-
-		StringBuffer responseXML = new StringBuffer();
-		String line = "";
-		while ((line = rd.readLine()) != null) {
-			responseXML.append(line);
-		}
-
-		logger.debug(responseXML.toString());
-		return responseXML.toString();
-	}
 
 }

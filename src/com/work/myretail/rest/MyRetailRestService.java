@@ -38,6 +38,7 @@ public class MyRetailRestService
     	MyRetailOutputTO finalOutPut=new MyRetailOutputTO();
     	finalOutPut.setId(prodId);
        if(version==1){
+    	   //calling processor method to fetch prod data
     	   finalOutPut=retailProcessor.processMyRetailData(prodId,finalOutPut);
        }
        else{

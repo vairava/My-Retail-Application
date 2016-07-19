@@ -28,9 +28,10 @@ public class MyRetailDataDAO {
 		HTTPClientHelper helper=new HTTPClientHelper();
 		String jsonData="";
 		FinalDataTO finalTo=null;
+		//target resource url
 		String finalUrl=ApplicationConstants.URL_FIRST_PART+productId+ApplicationConstants.URL_SECOND_PART;
 		jsonData=helper.sendGet(finalUrl);
-		
+		//if we get response from the TGT url then marshall it to required TO obj
 		if((!"".equalsIgnoreCase(jsonData) && jsonData!=null)){
 			finalTo=(FinalDataTO)MarshallingUtil.unmarshalFromJSON(jsonData, FinalDataTO.class);
 		}
@@ -46,6 +47,7 @@ public class MyRetailDataDAO {
 	public  BasicDBObject processNoSqlManupulation(MyRetailOutputTO finalTo) throws UnknownHostException{
 		LOGGER.debug("entering into processNoSqlManupulation()--->>");
 		DBCollection dbColl=MongoDBConnection.getDBConnection();
+		//getting pricing for for the product id from mongodb
 		BasicDBObject finalResult=getPricingFromDB(finalTo.getId(),dbColl);
 		LOGGER.debug("entering into processNoSqlManupulation()--->>");
 		return finalResult;
@@ -58,6 +60,7 @@ public class MyRetailDataDAO {
 	 */
 	public String updatePricingForProduct(PricingInsertTO pricingTo,DBCollection dbColl){
 		LOGGER.debug("entering into updatePricingForProduct()--->>");
+		//updating pricing data to mongodb
 			MongoDBConnection.insertData(dbColl,pricingTo);
 			LOGGER.debug("entering into updatePricingForProduct()--->>");
 		return ApplicationConstants.UPDATE_SUCCESS;

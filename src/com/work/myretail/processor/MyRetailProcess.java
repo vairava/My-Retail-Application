@@ -30,18 +30,19 @@ public class MyRetailProcess {
 		LOGGER.debug("entering processMyRetailData()-->>");
 		MyRetailDataDAO dataDao=new MyRetailDataDAO();
 		try{
+			//calling dao method to get the data from target url
 		FinalDataTO finalTo=dataDao.getDataForProductId(prodId);
 		if(finalTo!=null){
+			//getting NAME of the product, which is general description, from the result
 			String name=finalTo.getProduct_composite_response().getItems().get(0).getGeneral_description();
 			outPutTO.setName(name);
 		Gson gson=new Gson();
 		LOGGER.debug("finalTo-->>"+gson.toJson(finalTo));
+		//send the id in the TO to get pricing for the id
 		BasicDBObject result=dataDao.processNoSqlManupulation(outPutTO);
 				if (result != null) {
 					outPutTO = manuplateResults(outPutTO, result);
 				}
-		}else{
-			outPutTO=null;
 		}
 		}catch(Exception e){
 			throw new MyRetailException("Erorr processing processMyRetailData()-->",e);
@@ -57,11 +58,13 @@ public class MyRetailProcess {
 	 */
 	public MyRetailOutputTO manuplateResults( MyRetailOutputTO finalTo,BasicDBObject result){
 		LOGGER.debug("entering manuplateResults()-->>");
+		//get currency code and value and set in output TO to show user
 		String currencyValue=result.getString(ApplicationConstants.CURRENCY_CODE);
 		double value=result.getDouble(ApplicationConstants.VALUE);
 		PricingDataTO pricingTo=new PricingDataTO();
 		pricingTo.setCurrency_code(currencyValue);
 		pricingTo.setValue(value);
+		//seting pricingTo to output to
 		finalTo.setCurrent_price(pricingTo);
 		LOGGER.debug("exiting manuplateResults()<<--");
 		return finalTo;
@@ -79,16 +82,20 @@ public class MyRetailProcess {
 		PricingInsertTO pricingInsert=new PricingInsertTO();
 		String response="";
 		try{
+			//preparing pricinginsertTo to update pricing in mongodb
 			pricingInsert.setId(prodId);
 			pricingInsert.setCurrency_code(pricingTO.getCurrent_price().getCurrency_code());
 			pricingInsert.setValue(pricingTO.getCurrent_price().getValue());
 			DBCollection dbColl = MongoDBConnection.getDBConnection();
+			//Validate if the product id is existing in db to update
 			boolean isPresent=validateproductId(pricingInsert,dbColl);
 			LOGGER.debug("Is ID found?--->>>"+isPresent);
+			//if present update
 			if(isPresent){
 				response=dataDao.updatePricingForProduct(pricingInsert,dbColl);
 			}
 			else{
+				//else return error msg
 				return ApplicationConstants.PRODUCT_ID_MISS_ERROR;
 			}
 		
