@@ -12,4 +12,7 @@ public final class ApplicationConstants {
 	public static String URL_FIRST_PART="https://api.target.com/products/v3/";
 	public static String URL_SECOND_PART="?fields=descriptions&id_type=TCIN&key=43cJWpLjH8Z8oR18KdrZDBKAgLLQKJjz";
 	public static String PRODUCT_ID_EXIST="Product Id already exist in db.";
+	public static String MONGO_DB_NAME="myRetailDB";
+	public static String MONGO_TABLE_NAME="pricingData";
+	public static String LOCAL_HOST="localhost";
 }

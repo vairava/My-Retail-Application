@@ -20,11 +20,11 @@ import com.work.myretail.util.ApplicationConstants;
 public class MongoDBConnection {
 	private static final  Logger LOGGER = Logger.getLogger(MongoDBConnection.class);
 	public static DBCollection getDBConnection() throws UnknownHostException{
-		MongoClient mongoClient = new MongoClient("localhost",27017);
-		DB db = mongoClient.getDB("myRetailDB");
+		MongoClient mongoClient = new MongoClient(ApplicationConstants.LOCAL_HOST,27017);
+		DB db = mongoClient.getDB(ApplicationConstants.MONGO_DB_NAME);
 		List<String> dbs = mongoClient.getDatabaseNames();
 		LOGGER.debug("DBs-->>"+dbs);
-		DBCollection col = db.getCollection("pricingData");
+		DBCollection col = db.getCollection(ApplicationConstants.MONGO_TABLE_NAME);
 		LOGGER.debug("collections-->>"+col);
 		return col;
 	}
@@ -32,10 +32,10 @@ public class MongoDBConnection {
 	public static void insertData(DBCollection col,PricingInsertTO pricingTo ){
 		DBObject query = BasicDBObjectBuilder.start().add("id", 13860428).get();
 		BasicDBObjectBuilder docBuilder = BasicDBObjectBuilder.start();
-		docBuilder.append("id", pricingTo.getId());
-		docBuilder.append("productname", pricingTo.getProductName());
- 		docBuilder.append("value", pricingTo.getValue());
-		docBuilder.append("currency_code", pricingTo.getCurrency_code());
+		docBuilder.append(ApplicationConstants.PRODUCT_ID, pricingTo.getId());
+		docBuilder.append(ApplicationConstants.PRODUCT_NAME, pricingTo.getProductName());
+ 		docBuilder.append(ApplicationConstants.VALUE, pricingTo.getValue());
+		docBuilder.append(ApplicationConstants.CURRENCY_CODE, pricingTo.getCurrency_code());
 		DBObject dbObj=docBuilder.get();
 		WriteResult result=col.update(query,dbObj);
 		
