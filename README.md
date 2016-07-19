@@ -15,8 +15,9 @@ Setting MyRetailApplication in local:
       1.Set the eclipse workspace for the git link below.
           https://github.com/vairava/My-Retail-Application.git
       2.Use Apache Tomcat 8.0 for running the application and java-1.8(all the dependent jars are included in the workspace itself) .
-      3.Set test data in mongodb(see heading "Setting MongoDB data" below)
-      4.Hit the MyRetail service and validate results(see heading "Test and validate MyRetailService" below)
+      3.Add log4j-1.2.15.jar and log4j.xml inside "Tomcat 8\lib" folder. Both these files are inside the project for reference which the interviewer can use.
+      4.Set test data in mongodb(see heading "Setting MongoDB data" below)
+      5.Hit the MyRetail service and validate results(see heading "Test and validate MyRetailService" below)
 
 Setting MONGODB data:
 ----------------------------
