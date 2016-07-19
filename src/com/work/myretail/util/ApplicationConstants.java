@@ -15,4 +15,5 @@ public final class ApplicationConstants {
 	public static String MONGO_DB_NAME="myRetailDB";
 	public static String MONGO_TABLE_NAME="pricingData";
 	public static String LOCAL_HOST="localhost";
+	public static String MISS_MATCH_ERROR="Product Id on URL and JSON doesnt match.";
 }

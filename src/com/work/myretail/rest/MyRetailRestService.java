@@ -20,6 +20,7 @@ import com.work.myretail.dto.MyRetailOutputTO;
 import com.work.myretail.dto.PricingInsertTO;
 import com.work.myretail.exception.MyRetailException;
 import com.work.myretail.processor.MyRetailProcess;
+import com.work.myretail.util.ApplicationConstants;
 
 @Path("/MyRetail")
 public class MyRetailRestService
@@ -61,7 +62,12 @@ public class MyRetailRestService
     	String response="";
     	MyRetailProcess retailProcessor=new MyRetailProcess();
        if(version==1){
+    	   if(prodId==pricingTO.getId()){
     	   response=retailProcessor.processPricingUpdate(prodId,pricingTO);
+    	   }
+    	   else{
+    		   response=ApplicationConstants.MISS_MATCH_ERROR;
+    	   }
     	   
        }
        else{
