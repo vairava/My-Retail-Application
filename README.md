@@ -63,7 +63,7 @@ Test and validate MyRetailService:
         				Header name="Content-type" and Value = "application/json"
         3.Use the below json to update the pricing data with appropriate currency_code and value for the product Id mentioned in the URL
         		eg:
-        		{"currency_code":"USD","value":96.99}
+        		{"id":13860428,"name":"BIG LEBOWSKI, THE Blu-ray","current_price":{"value":99.99,"currency_code":"USD"}}
 	
         4.Once updated is success we can see the updated pricing by hitting the GET service url mention above in "1.Testing GET service to retrieve Product details:" section.
         5.Or we can see the update result by running the GenerateTOHelper.java under com.work.myretail.util package by "run as java application" which gives all the results from database.

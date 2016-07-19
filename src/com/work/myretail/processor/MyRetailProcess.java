@@ -34,11 +34,15 @@ public class MyRetailProcess {
 		if(finalTo!=null){
 			String name=finalTo.getProduct_composite_response().getItems().get(0).getGeneral_description();
 			outPutTO.setName(name);
-		}
 		Gson gson=new Gson();
 		LOGGER.debug("finalTo-->>"+gson.toJson(finalTo));
 		BasicDBObject result=dataDao.processNoSqlManupulation(outPutTO);
-		outPutTO=manuplateResults(outPutTO,result);
+				if (result != null) {
+					outPutTO = manuplateResults(outPutTO, result);
+				}
+		}else{
+			outPutTO=null;
+		}
 		}catch(Exception e){
 			throw new MyRetailException("Erorr processing processMyRetailData()-->",e);
 		}
@@ -69,15 +73,15 @@ public class MyRetailProcess {
 	 * @return response output
 	 * @throws Exception
 	 */
-	public String processPricingUpdate(int prodId,PricingDataTO pricingTO) throws MyRetailException{
+	public String processPricingUpdate(int prodId,MyRetailOutputTO pricingTO) throws MyRetailException{
 		LOGGER.debug("entering processPricingUpdate()-->>");
 		MyRetailDataDAO dataDao=new MyRetailDataDAO();
 		PricingInsertTO pricingInsert=new PricingInsertTO();
 		String response="";
 		try{
 			pricingInsert.setId(prodId);
-			pricingInsert.setCurrency_code(pricingTO.getCurrency_code());
-			pricingInsert.setValue(pricingTO.getValue());
+			pricingInsert.setCurrency_code(pricingTO.getCurrent_price().getCurrency_code());
+			pricingInsert.setValue(pricingTO.getCurrent_price().getValue());
 			DBCollection dbColl = MongoDBConnection.getDBConnection();
 			boolean isPresent=validateproductId(pricingInsert,dbColl);
 			LOGGER.debug("Is ID found?--->>>"+isPresent);
