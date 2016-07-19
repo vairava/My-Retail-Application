@@ -21,20 +21,21 @@ Setting MyRetailApplication in local:
 Setting MONGODB data:
 ----------------------------
         1.Use Poster or Postman chrome plugin to insert data to MONGODB.
-        2.Use the below service url(for interviewer's convenience I made data setup easy through a POST Webservice)
+        2.Create Database and collection(table) by running GenerateTOHelper.java main method under com.work.myretail.util package
+        3.Use the below service url(for interviewer's convenience I made data setup easy through a POST Webservice)
         http://localhost:8080/MyRetailService/rs/MyRetail/setdata
         
         RequestMethod=POST
         
-        2.use the below json format to insert data
+        4.use the below json format to insert data
         {"id":13860428,"productName":"BIG LEBOWSKI, THE Blu-ray","currency_code":"RUPEE","value":96.99}
         			where "id"=product id
         				  "productname"=Name of product for the product id
         				  "currency_code"=currency code for the product
         				  "value"=price value for the product
         				  
-        3.Insert as many product data as required
-        4.Run GenerateTOHelper.java main method under com.work.myretail.util package to see all the data inserted into db through console.
+        5.Insert as many product data as required
+        6.Run GenerateTOHelper.java main method under com.work.myretail.util package to see all the data inserted into db through console.
 
 Test and validate MyRetailService:
 ---------------------------------
