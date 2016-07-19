@@ -30,7 +30,7 @@ public class MongoDBConnection {
 	}
 	
 	public static void insertData(DBCollection col,PricingInsertTO pricingTo ){
-		DBObject query = BasicDBObjectBuilder.start().add("id", 13860428).get();
+		DBObject query = BasicDBObjectBuilder.start().add("id", pricingTo.getId()).get();
 		BasicDBObjectBuilder docBuilder = BasicDBObjectBuilder.start();
 		docBuilder.append(ApplicationConstants.PRODUCT_ID, pricingTo.getId());
 		docBuilder.append(ApplicationConstants.PRODUCT_NAME, pricingTo.getProductName());

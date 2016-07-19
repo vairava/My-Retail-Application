@@ -39,9 +39,6 @@ public class MyRetailRestService
     	finalOutPut.setId(prodId);
        if(version==1){
     	   finalOutPut=retailProcessor.processMyRetailData(prodId,finalOutPut);
-    	   if(finalOutPut==null){
-    		   return Response.status(204).entity("Data resource not found").build();
-    	   }
        }
        else{
     	   LOGGER.error("INVALID VERSION: "+version);
@@ -53,7 +50,6 @@ public class MyRetailRestService
 	
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    //@Consumes(MediaType.APPLICATION_JSON)
     @Path("/products/{prodId}")
     public String updatePricingDetails(@PathParam("prodId") int prodId,MyRetailOutputTO pricingTO,
                            @DefaultValue("1") @QueryParam("version") int version) throws Exception
