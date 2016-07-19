@@ -17,7 +17,6 @@ import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 
 import com.work.myretail.dto.MyRetailOutputTO;
-import com.work.myretail.dto.PricingDataTO;
 import com.work.myretail.dto.PricingInsertTO;
 import com.work.myretail.exception.MyRetailException;
 import com.work.myretail.processor.MyRetailProcess;
